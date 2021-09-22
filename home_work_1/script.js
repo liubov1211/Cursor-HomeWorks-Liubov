@@ -35,7 +35,7 @@ console.log(discount);
 const toPay = (sum - (sum * discount/100)).toFixed(2);
 console.log(toPay);
 
-const netProfit = Math.round(sum/2 - discount);
+const netProfit = Math.round(sum/2 - (sum * discount/100));
 console.log(netProfit);
 
 const result = `Максимальна ціна: ${maxPrice},
