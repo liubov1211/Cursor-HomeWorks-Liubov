@@ -1,14 +1,21 @@
-const n = +prompt("write any number");
-const m = +prompt("write any other number greater than the first number");
-const checkTheТumberOfN = parseInt(n);
-const checkTheТumberOfM = parseInt(m);
-const choice = confirm("Skip even numbers when calculating the amount");
+let n;
+let m;
+do {
+    n = +prompt("Введи перше число");
+} while (!Number.isInteger(n));
+
+do {
+    m = +prompt("Введи друге число, але більше ніж перше");
+} while (!Number.isInteger(m) || (m < n));
+
+const choice = confirm("Пропускати парні числа???");
 let sum = 0;
-for(let i = n; i <= m; i++) {
-    if(choice === true && (i % 2 === 0)) {
+
+for (let i = n; i <= m; i++) {
+    if (choice && (i % 2 === 0)) {
         sum += 0;
-     }else {
-        sum += i; 
+    } else {
+        sum += i;
     }
 }
 console.log(sum);
