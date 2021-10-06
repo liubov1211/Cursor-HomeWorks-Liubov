@@ -34,7 +34,7 @@ const getStudentMarks = (students, marks) => {
 }
 
 const getPairsMarks = (pairs) => {
-    const pairsMarks = pairs.map(el => [...el, (Math.round(Math.random() * (5 - 1)) + 1)]);
+    const pairsMarks = getPairsWithThems(pairs, themes).map((el) => [...el, (Math.round(Math.random() * (5 - 1)) + 1)]);
     return pairsMarks;
 }
 
