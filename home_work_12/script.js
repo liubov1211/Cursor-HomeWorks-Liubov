@@ -16,7 +16,16 @@ function removeTransition(e) {
         }
     });
 }
+let song = null;
 
+document.addEventListener('play', e => {
+    if(song && song != e.target) {
+        song.pause();
+    }
+    song = e.target;
+},
+true
+);
 allKeys.forEach((key) => key.addEventListener('transitionend', removeTransition));
 
 allKeys.forEach(key => key.addEventListener('click', function() {
