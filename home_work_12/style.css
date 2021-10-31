@@ -1,0 +1,30 @@
+body{
+    background-color: rgb(214, 183, 183);
+}
+.container{
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   align-items: center;
+    background-color: rgb(214, 183, 183);
+
+}
+.key{
+    background-color: rgb(245, 132, 91);
+    border: double 5px rgb(116, 36, 7);
+    width: 70px;
+    height: 70px;
+    color: white;
+    transition: all 5s;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.play {
+    transform: scale(1.1);
+    border-color: rgb(204, 68, 19);
+    box-shadow: 0 0 10px rgb(204, 68, 19);
+}
