@@ -46,3 +46,6 @@ span{
     background-color: rgb(31, 28, 28, 0.5);
     text-align: center;
 }
+#next{
+    display: none;
+}

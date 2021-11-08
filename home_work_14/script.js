@@ -3,20 +3,32 @@ const list = document.getElementById('list');
 const btn = document.getElementById('getInf');
 const input = document.getElementById('input');
 const nextPage = document.getElementById('nextPage');
+const next = document.getElementById('next');
+const page = document.getElementById('page');
 const getPeople = () => {
+    next.style.display = 'none';
     list.innerHTML = 'loading...'
     axios
-        .get(`${baseUrl}/people`)
+        .get(`${baseUrl}/films/2`)
         .then((response) => {
-            const codeHtml = response.data.results.map((item) => `
-            <div class = "people">
+            list.innerHTML = ''
+            const codeHtml = response.data.characters;
+            codeHtml.forEach((item) => 
+            axios
+            .get(item)
+            .then((response) => {
+                const item = response.data;
+                const listPeople = 
+                `<div class = "people">
                  <h3>${item.name}<h3>
                 <h4>Birth year : ${item.birth_year}</h4>
                 <h4>Gender : ${item.gender}</h4>
-            </div>`
+                 </div>`
+                 list.innerHTML += listPeople;
+            })
             )
-            list.innerHTML = codeHtml.join("");
-            console.log(response.data.results);
+          
+            console.log(response.data.characters);
         })
         .catch((err) => {
             console.log('Error:', err);
@@ -24,6 +36,7 @@ const getPeople = () => {
         })
 } 
 const getFilm = () => {
+    next.style.display = 'none';
     list.innerHTML = 'loading...'
     axios
         .get(`${baseUrl}/films/${input.value}`)
@@ -42,11 +55,13 @@ const getFilm = () => {
         })
 }
 btn.addEventListener('click', ()=> (input.value > 0 && input.value < 7) ? getFilm(): getPeople());
-
+let planetsPage = 1;
+const limit = 6;
 const planets = () => {
-    list.innerHTML = 'loading...'
+    next.style.display = 'block';
+    list.innerHTML = 'loading...';
     axios
-        .get(`${baseUrl}/planets`)
+        .get(`${baseUrl}/planets?limit=${limit}&page=${planetsPage}`)
         .then((response) => {
             const codeHtml = response.data.results.map((item) => `
             <div class = "people">
@@ -54,7 +69,16 @@ const planets = () => {
             </div>`
             )
             list.innerHTML = codeHtml.join("");
-            console.log(response.data.results);
         });
 }
+
 nextPage.onclick = planets;
+next.onclick = () => {
+    if(planetsPage === limit){
+        return
+    }
+    else{
+        planetsPage++;
+        planets();
+    }
+}
